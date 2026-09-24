@@ -1,0 +1,30 @@
+[
+	{
+		"Delivery": "80000003",
+		"CompanyCode": "HM01",
+		"SalesOrganization": "HM10",
+		"FiscalYear": "2025",
+		"SalesOrder": "30000003",
+		"Quotation": "20000003",
+		"Customer": "100003",
+		"CustomerName": "Schindler Aufzüge AG",
+		"PlannedGoodsIssueDate": "/Date(1747353600000)/",
+		"DeliveryStatus": "Goods issue open",
+		"NetAmount": "51400.00",
+		"Currency": "CHF"
+	},
+	{
+		"Delivery": "80000009",
+		"CompanyCode": "HM01",
+		"SalesOrganization": "HM10",
+		"FiscalYear": "2026",
+		"SalesOrder": "30000009",
+		"Quotation": "20000009",
+		"Customer": "100009",
+		"CustomerName": "Endress+Hauser Flowtec AG",
+		"PlannedGoodsIssueDate": "/Date(1779408000000)/",
+		"DeliveryStatus": "Goods issue open",
+		"NetAmount": "10700.00",
+		"Currency": "CHF"
+	}
+]

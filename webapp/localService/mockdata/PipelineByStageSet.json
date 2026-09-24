@@ -1,0 +1,57 @@
+[
+	{
+		"ID": "2026-01",
+		"CompanyCode": "HM01",
+		"SalesOrganization": "HM10",
+		"FiscalYear": "2026",
+		"Stage": "Quotation",
+		"StageSequence": 1,
+		"DocumentCount": 1,
+		"NetAmount": "3840.00",
+		"Currency": "CHF"
+	},
+	{
+		"ID": "2026-02",
+		"CompanyCode": "HM01",
+		"SalesOrganization": "HM10",
+		"FiscalYear": "2026",
+		"Stage": "Order",
+		"StageSequence": 2,
+		"DocumentCount": 0,
+		"NetAmount": "0.00",
+		"Currency": "CHF"
+	},
+	{
+		"ID": "2026-03",
+		"CompanyCode": "HM01",
+		"SalesOrganization": "HM10",
+		"FiscalYear": "2026",
+		"Stage": "Delivery",
+		"StageSequence": 3,
+		"DocumentCount": 1,
+		"NetAmount": "10700.00",
+		"Currency": "CHF"
+	},
+	{
+		"ID": "2026-04",
+		"CompanyCode": "HM01",
+		"SalesOrganization": "HM10",
+		"FiscalYear": "2026",
+		"Stage": "Billing",
+		"StageSequence": 4,
+		"DocumentCount": 0,
+		"NetAmount": "0.00",
+		"Currency": "CHF"
+	},
+	{
+		"ID": "2026-05",
+		"CompanyCode": "HM01",
+		"SalesOrganization": "HM10",
+		"FiscalYear": "2026",
+		"Stage": "Accounting",
+		"StageSequence": 5,
+		"DocumentCount": 4,
+		"NetAmount": "120840.00",
+		"Currency": "CHF"
+	}
+]

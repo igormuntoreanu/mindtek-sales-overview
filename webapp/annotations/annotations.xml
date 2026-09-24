@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+	<edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+		<edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+		<edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="/sap/opu/odata/sap/SD_SALES_OVERVIEW_SRV/$metadata">
+		<edmx:Include Namespace="SD_SALES_OVERVIEW_SRV"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema Namespace="local" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="SD_SALES_OVERVIEW_SRV.SalesFilter">
+				<Annotation Term="UI.SelectionFields">
+					<Collection>
+						<PropertyPath>CompanyCode</PropertyPath>
+						<PropertyPath>SalesOrganization</PropertyPath>
+						<PropertyPath>FiscalYear</PropertyPath>
+					</Collection>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="SD_SALES_OVERVIEW_SRV.SalesFilter/CompanyCode">
+				<Annotation Term="Common.ValueList">
+					<Record>
+						<PropertyValue Property="CollectionPath" String="CompanyCodeSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="CompanyCode"/>
+									<PropertyValue Property="ValueListProperty" String="CompanyCode"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="CompanyCodeName"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="SD_SALES_OVERVIEW_SRV.SalesByMonth">
+				<Annotation Term="UI.DataPoint" Qualifier="SalesByMonth">
+					<Record>
+						<PropertyValue Property="Value" Path="NetAmount"/>
+						<PropertyValue Property="Title" String="Net sales"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Chart" Qualifier="SalesByMonth">
+					<Record>
+						<PropertyValue Property="Title" String="Net sales by month"/>
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
+						<PropertyValue Property="Measures">
+							<Collection><PropertyPath>NetAmount</PropertyPath></Collection>
+						</PropertyValue>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="NetAmount"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Dimensions">
+							<Collection><PropertyPath>PeriodName</PropertyPath></Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="PeriodName"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant" Qualifier="SalesByMonth">
+					<Record>
+						<PropertyValue Property="MaxItems" Int="12"/>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record Type="Common.SortOrderType">
+									<PropertyValue Property="Property" PropertyPath="FiscalPeriod"/>
+									<PropertyValue Property="Descending" Bool="false"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>@UI.Chart#SalesByMonth</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.SelectionVariant" Qualifier="SalesByMonth">
+					<Record>
+						<PropertyValue Property="SelectOptions">
+							<Collection>
+								<Record Type="UI.SelectOptionType">
+									<PropertyValue Property="PropertyName" PropertyPath="FiscalYear"/>
+									<PropertyValue Property="Ranges">
+										<Collection>
+											<Record Type="UI.SelectionRangeType">
+												<PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+												<PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+												<PropertyValue Property="Low" String="2026"/>
+											</Record>
+										</Collection>
+									</PropertyValue>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Identification" Qualifier="SalesByMonth">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="PeriodName"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="SD_SALES_OVERVIEW_SRV.PipelineByStage">
+				<Annotation Term="UI.DataPoint" Qualifier="Pipeline">
+					<Record>
+						<PropertyValue Property="Value" Path="NetAmount"/>
+						<PropertyValue Property="Title" String="Pipeline value"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Chart" Qualifier="Pipeline">
+					<Record>
+						<PropertyValue Property="Title" String="Document pipeline"/>
+						<PropertyValue Property="ChartType" EnumMember="UI.ChartType/Bar"/>
+						<PropertyValue Property="Measures">
+							<Collection><PropertyPath>NetAmount</PropertyPath></Collection>
+						</PropertyValue>
+						<PropertyValue Property="MeasureAttributes">
+							<Collection>
+								<Record Type="UI.ChartMeasureAttributeType">
+									<PropertyValue Property="Measure" PropertyPath="NetAmount"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartMeasureRoleType/Axis1"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Dimensions">
+							<Collection><PropertyPath>Stage</PropertyPath></Collection>
+						</PropertyValue>
+						<PropertyValue Property="DimensionAttributes">
+							<Collection>
+								<Record Type="UI.ChartDimensionAttributeType">
+									<PropertyValue Property="Dimension" PropertyPath="Stage"/>
+									<PropertyValue Property="Role" EnumMember="UI.ChartDimensionRoleType/Category"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant" Qualifier="Pipeline">
+					<Record>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record Type="Common.SortOrderType">
+									<PropertyValue Property="Property" PropertyPath="StageSequence"/>
+									<PropertyValue Property="Descending" Bool="false"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>@UI.Chart#Pipeline</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.SelectionVariant" Qualifier="Pipeline">
+					<Record>
+						<PropertyValue Property="SelectOptions">
+							<Collection>
+								<Record Type="UI.SelectOptionType">
+									<PropertyValue Property="PropertyName" PropertyPath="FiscalYear"/>
+									<PropertyValue Property="Ranges">
+										<Collection>
+											<Record Type="UI.SelectionRangeType">
+												<PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+												<PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+												<PropertyValue Property="Low" String="2026"/>
+											</Record>
+										</Collection>
+									</PropertyValue>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Identification" Qualifier="Pipeline">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="Stage"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="SD_SALES_OVERVIEW_SRV.SalesKpi">
+				<Annotation Term="UI.DataPoint" Qualifier="OpenQuotations">
+					<Record>
+						<PropertyValue Property="Value" Path="KpiValue"/>
+						<PropertyValue Property="Title" String="Open quotations"/>
+						<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Critical"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.SelectionVariant" Qualifier="OpenQuotations">
+					<Record>
+						<PropertyValue Property="SelectOptions">
+							<Collection>
+								<Record Type="UI.SelectOptionType">
+									<PropertyValue Property="PropertyName" PropertyPath="ID"/>
+									<PropertyValue Property="Ranges">
+										<Collection>
+											<Record Type="UI.SelectionRangeType">
+												<PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+												<PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+												<PropertyValue Property="Low" String="OPEN_QT"/>
+											</Record>
+										</Collection>
+									</PropertyValue>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant" Qualifier="OpenQuotations">
+					<Record>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>@UI.DataPoint#OpenQuotations</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.KPI" Qualifier="OpenQuotations">
+					<Record>
+						<PropertyValue Property="DataPoint" Path="@UI.DataPoint#OpenQuotations"/>
+						<PropertyValue Property="SelectionVariant" Path="@UI.SelectionVariant#OpenQuotations"/>
+						<PropertyValue Property="Detail">
+							<Record Type="UI.KPIDetailType">
+								<PropertyValue Property="DefaultPresentationVariant" Path="@UI.PresentationVariant#OpenQuotations"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Identification" Qualifier="OpenQuotations">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="KpiName"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.DataPoint" Qualifier="OrderBacklog">
+					<Record>
+						<PropertyValue Property="Value" Path="KpiValue"/>
+						<PropertyValue Property="Title" String="Order backlog"/>
+						<PropertyValue Property="Criticality" EnumMember="UI.CriticalityType/Negative"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.SelectionVariant" Qualifier="OrderBacklog">
+					<Record>
+						<PropertyValue Property="SelectOptions">
+							<Collection>
+								<Record Type="UI.SelectOptionType">
+									<PropertyValue Property="PropertyName" PropertyPath="ID"/>
+									<PropertyValue Property="Ranges">
+										<Collection>
+											<Record Type="UI.SelectionRangeType">
+												<PropertyValue Property="Sign" EnumMember="UI.SelectionRangeSignType/I"/>
+												<PropertyValue Property="Option" EnumMember="UI.SelectionRangeOptionType/EQ"/>
+												<PropertyValue Property="Low" String="BACKLOG"/>
+											</Record>
+										</Collection>
+									</PropertyValue>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant" Qualifier="OrderBacklog">
+					<Record>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>@UI.DataPoint#OrderBacklog</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.KPI" Qualifier="OrderBacklog">
+					<Record>
+						<PropertyValue Property="DataPoint" Path="@UI.DataPoint#OrderBacklog"/>
+						<PropertyValue Property="SelectionVariant" Path="@UI.SelectionVariant#OrderBacklog"/>
+						<PropertyValue Property="Detail">
+							<Record Type="UI.KPIDetailType">
+								<PropertyValue Property="DefaultPresentationVariant" Path="@UI.PresentationVariant#OrderBacklog"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.Identification" Qualifier="OrderBacklog">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="KpiName"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="SD_SALES_OVERVIEW_SRV.DocumentFlow">
+				<Annotation Term="UI.HeaderInfo">
+					<Record>
+						<PropertyValue Property="TypeName" String="Document flow"/>
+						<PropertyValue Property="TypeNamePlural" String="Document flows"/>
+						<PropertyValue Property="Title">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="CustomerName"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="Description">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="FlowStatus"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="DocumentChain"/>
+							<PropertyValue Property="Label" String="Quotation → Order → Delivery → Billing → Accounting"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="CustomerName"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="FlowStatus"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="OverallNetAmount"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="DocumentFlowID"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant">
+					<Record>
+						<PropertyValue Property="MaxItems" Int="6"/>
+						<PropertyValue Property="SortOrder">
+							<Collection>
+								<Record Type="Common.SortOrderType">
+									<PropertyValue Property="Property" PropertyPath="DocumentFlowID"/>
+									<PropertyValue Property="Descending" Bool="true"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>@UI.LineItem</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.SelectionVariant">
+					<Record/>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="SD_SALES_OVERVIEW_SRV.OpenDelivery">
+				<Annotation Term="UI.HeaderInfo">
+					<Record>
+						<PropertyValue Property="TypeName" String="Delivery"/>
+						<PropertyValue Property="TypeNamePlural" String="Deliveries"/>
+						<PropertyValue Property="Title">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="Delivery"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="Description">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="CustomerName"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="Delivery"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="SalesOrder"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="CustomerName"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="PlannedGoodsIssueDate"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="NetAmount"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="DeliveryStatus"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="Delivery"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant">
+					<Record>
+						<PropertyValue Property="MaxItems" Int="5"/>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>@UI.LineItem</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+
+			<Annotations Target="SD_SALES_OVERVIEW_SRV.BillingDocument">
+				<Annotation Term="UI.HeaderInfo">
+					<Record>
+						<PropertyValue Property="TypeName" String="Billing document"/>
+						<PropertyValue Property="TypeNamePlural" String="Billing documents"/>
+						<PropertyValue Property="Title">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="BillingDocument"/>
+							</Record>
+						</PropertyValue>
+						<PropertyValue Property="Description">
+							<Record Type="UI.DataField">
+								<PropertyValue Property="Value" Path="AccountingStatus"/>
+							</Record>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="BillingDocument"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="SalesOrder"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="CustomerName"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="BillingDate"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="NetAmount"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="AccountingDocument"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="AccountingStatus"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="BillingDocument"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.PresentationVariant">
+					<Record>
+						<PropertyValue Property="MaxItems" Int="5"/>
+						<PropertyValue Property="Visualizations">
+							<Collection>
+								<AnnotationPath>@UI.LineItem</AnnotationPath>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

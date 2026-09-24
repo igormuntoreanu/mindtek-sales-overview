@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema Namespace="SD_SALES_OVERVIEW_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="DocumentFlow" sap:content-version="1">
+				<Key><PropertyRef Name="DocumentFlowID"/></Key>
+				<Property Name="DocumentFlowID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Flow" sap:filterable="false"/>
+				<Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:label="Company Code" sap:filterable="true"/>
+				<Property Name="CompanyCodeName" Type="Edm.String" MaxLength="40" sap:label="Company Name"/>
+				<Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" sap:label="Sales Organization" sap:filterable="true"/>
+				<Property Name="SalesOrganizationName" Type="Edm.String" MaxLength="40" sap:label="Sales Organization Name"/>
+				<Property Name="DistributionChannel" Type="Edm.String" MaxLength="2" sap:label="Distribution Channel"/>
+				<Property Name="Division" Type="Edm.String" MaxLength="2" sap:label="Division"/>
+				<Property Name="FiscalYear" Type="Edm.String" MaxLength="4" sap:label="Fiscal Year" sap:filterable="true"/>
+				<Property Name="Customer" Type="Edm.String" MaxLength="10" sap:label="Customer"/>
+				<Property Name="CustomerName" Type="Edm.String" MaxLength="40" sap:label="Customer Name"/>
+				<Property Name="Material" Type="Edm.String" MaxLength="18" sap:label="Material"/>
+				<Property Name="MaterialName" Type="Edm.String" MaxLength="40" sap:label="Material Name"/>
+				<Property Name="Quotation" Type="Edm.String" MaxLength="10" sap:label="Quotation"/>
+				<Property Name="QuotationDate" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:label="Quotation Date"/>
+				<Property Name="QuotationNetAmount" Type="Edm.Decimal" Precision="13" Scale="2" sap:label="Quotation Value"/>
+				<Property Name="SalesOrder" Type="Edm.String" MaxLength="10" sap:label="Sales Order"/>
+				<Property Name="SalesOrderDate" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:label="Order Date"/>
+				<Property Name="OrderNetAmount" Type="Edm.Decimal" Precision="13" Scale="2" sap:label="Order Value"/>
+				<Property Name="Delivery" Type="Edm.String" MaxLength="10" sap:label="Delivery"/>
+				<Property Name="DeliveryDate" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:label="Delivery Date"/>
+				<Property Name="BillingDocument" Type="Edm.String" MaxLength="10" sap:label="Billing Document"/>
+				<Property Name="BillingDate" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:label="Billing Date"/>
+				<Property Name="BillingNetAmount" Type="Edm.Decimal" Precision="13" Scale="2" sap:label="Billing Value"/>
+				<Property Name="AccountingDocument" Type="Edm.String" MaxLength="10" sap:label="Accounting Document"/>
+				<Property Name="AccountingDocumentType" Type="Edm.String" MaxLength="2" sap:label="Accounting Doc. Type"/>
+				<Property Name="FiscalYearAccounting" Type="Edm.String" MaxLength="4" sap:label="FI Fiscal Year"/>
+				<Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+				<Property Name="FlowStatus" Type="Edm.String" MaxLength="40" sap:label="Status"/>
+				<Property Name="DocumentChain" Type="Edm.String" MaxLength="80" sap:label="Document Flow"/>
+				<Property Name="OverallNetAmount" Type="Edm.Decimal" Precision="13" Scale="2" sap:label="Net Value" sap:unit="Currency"/>
+			</EntityType>
+			<EntityType Name="SalesByMonth" sap:semantics="aggregate" sap:content-version="1">
+				<Key><PropertyRef Name="ID"/></Key>
+				<Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="10" sap:filterable="false"/>
+				<Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:label="Company Code" sap:aggregation-role="dimension" sap:filterable="true"/>
+				<Property Name="CompanyCodeName" Type="Edm.String" MaxLength="40" sap:label="Company Name" sap:aggregation-role="dimension"/>
+				<Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" sap:label="Sales Organization" sap:aggregation-role="dimension" sap:filterable="true"/>
+				<Property Name="SalesOrganizationName" Type="Edm.String" MaxLength="40" sap:label="Sales Organization Name" sap:aggregation-role="dimension"/>
+				<Property Name="FiscalYear" Type="Edm.String" MaxLength="4" sap:label="Fiscal Year" sap:aggregation-role="dimension" sap:filterable="true"/>
+				<Property Name="FiscalPeriod" Type="Edm.String" MaxLength="3" sap:label="Period" sap:aggregation-role="dimension"/>
+				<Property Name="PeriodName" Type="Edm.String" MaxLength="3" sap:label="Month" sap:aggregation-role="dimension"/>
+				<Property Name="NetAmount" Type="Edm.Decimal" Precision="13" Scale="2" sap:label="Net Amount" sap:aggregation-role="measure" sap:unit="Currency"/>
+				<Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+			</EntityType>
+			<EntityType Name="PipelineByStage" sap:semantics="aggregate" sap:content-version="1">
+				<Key><PropertyRef Name="ID"/></Key>
+				<Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="10" sap:filterable="false"/>
+				<Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:label="Company Code" sap:aggregation-role="dimension" sap:filterable="true"/>
+				<Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" sap:label="Sales Organization" sap:aggregation-role="dimension" sap:filterable="true"/>
+				<Property Name="FiscalYear" Type="Edm.String" MaxLength="4" sap:label="Fiscal Year" sap:aggregation-role="dimension" sap:filterable="true"/>
+				<Property Name="Stage" Type="Edm.String" MaxLength="20" sap:label="Stage" sap:aggregation-role="dimension"/>
+				<Property Name="StageSequence" Type="Edm.Int32" sap:label="Sequence" sap:aggregation-role="dimension"/>
+				<Property Name="DocumentCount" Type="Edm.Int32" sap:label="Documents" sap:aggregation-role="measure"/>
+				<Property Name="NetAmount" Type="Edm.Decimal" Precision="13" Scale="2" sap:label="Net Amount" sap:aggregation-role="measure" sap:unit="Currency"/>
+				<Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+			</EntityType>
+			<EntityType Name="SalesKpi" sap:semantics="aggregate" sap:content-version="1">
+				<Key><PropertyRef Name="ID"/></Key>
+				<Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="20" sap:filterable="false"/>
+				<Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:label="Company Code" sap:aggregation-role="dimension" sap:filterable="true"/>
+				<Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" sap:label="Sales Organization" sap:aggregation-role="dimension" sap:filterable="true"/>
+				<Property Name="FiscalYear" Type="Edm.String" MaxLength="4" sap:label="Fiscal Year" sap:aggregation-role="dimension" sap:filterable="true"/>
+				<Property Name="KpiName" Type="Edm.String" MaxLength="40" sap:label="KPI" sap:aggregation-role="dimension"/>
+				<Property Name="KpiValue" Type="Edm.Decimal" Precision="13" Scale="2" sap:label="Value" sap:aggregation-role="measure" sap:unit="Currency"/>
+				<Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+			</EntityType>
+			<EntityType Name="OpenDelivery" sap:content-version="1">
+				<Key><PropertyRef Name="Delivery"/></Key>
+				<Property Name="Delivery" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Delivery"/>
+				<Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:label="Company Code" sap:filterable="true"/>
+				<Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" sap:label="Sales Organization" sap:filterable="true"/>
+				<Property Name="FiscalYear" Type="Edm.String" MaxLength="4" sap:label="Fiscal Year" sap:filterable="true"/>
+				<Property Name="SalesOrder" Type="Edm.String" MaxLength="10" sap:label="Sales Order"/>
+				<Property Name="Quotation" Type="Edm.String" MaxLength="10" sap:label="Quotation"/>
+				<Property Name="Customer" Type="Edm.String" MaxLength="10" sap:label="Customer"/>
+				<Property Name="CustomerName" Type="Edm.String" MaxLength="40" sap:label="Customer Name"/>
+				<Property Name="PlannedGoodsIssueDate" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:label="Planned GI Date"/>
+				<Property Name="DeliveryStatus" Type="Edm.String" MaxLength="40" sap:label="Status"/>
+				<Property Name="NetAmount" Type="Edm.Decimal" Precision="13" Scale="2" sap:label="Net Value" sap:unit="Currency"/>
+				<Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+			</EntityType>
+			<EntityType Name="BillingDocument" sap:content-version="1">
+				<Key><PropertyRef Name="BillingDocument"/></Key>
+				<Property Name="BillingDocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Billing Document"/>
+				<Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:label="Company Code" sap:filterable="true"/>
+				<Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" sap:label="Sales Organization" sap:filterable="true"/>
+				<Property Name="FiscalYear" Type="Edm.String" MaxLength="4" sap:label="Fiscal Year" sap:filterable="true"/>
+				<Property Name="Quotation" Type="Edm.String" MaxLength="10" sap:label="Quotation"/>
+				<Property Name="SalesOrder" Type="Edm.String" MaxLength="10" sap:label="Sales Order"/>
+				<Property Name="Delivery" Type="Edm.String" MaxLength="10" sap:label="Delivery"/>
+				<Property Name="AccountingDocument" Type="Edm.String" MaxLength="10" sap:label="Accounting Document"/>
+				<Property Name="Customer" Type="Edm.String" MaxLength="10" sap:label="Customer"/>
+				<Property Name="CustomerName" Type="Edm.String" MaxLength="40" sap:label="Customer Name"/>
+				<Property Name="BillingDate" Type="Edm.DateTime" Precision="7" sap:display-format="Date" sap:label="Billing Date"/>
+				<Property Name="NetAmount" Type="Edm.Decimal" Precision="13" Scale="2" sap:label="Net Value" sap:unit="Currency"/>
+				<Property Name="TaxAmount" Type="Edm.Decimal" Precision="13" Scale="2" sap:label="Tax" sap:unit="Currency"/>
+				<Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Currency" sap:semantics="currency-code"/>
+				<Property Name="AccountingStatus" Type="Edm.String" MaxLength="20" sap:label="Accounting Status"/>
+			</EntityType>
+			<EntityType Name="CompanyCode" sap:content-version="1">
+				<Key><PropertyRef Name="CompanyCode"/></Key>
+				<Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Company Code"/>
+				<Property Name="CompanyCodeName" Type="Edm.String" MaxLength="40" sap:label="Company Name"/>
+				<Property Name="CityName" Type="Edm.String" MaxLength="40" sap:label="City"/>
+				<Property Name="Country" Type="Edm.String" MaxLength="3" sap:label="Country"/>
+				<Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Currency"/>
+			</EntityType>
+			<EntityType Name="SalesOrganization" sap:content-version="1">
+				<Key><PropertyRef Name="SalesOrganization"/></Key>
+				<Property Name="SalesOrganization" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Sales Organization"/>
+				<Property Name="SalesOrganizationName" Type="Edm.String" MaxLength="40" sap:label="Sales Organization Name"/>
+				<Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:label="Company Code"/>
+			</EntityType>
+			<EntityType Name="SalesFilter" sap:content-version="1">
+				<Key><PropertyRef Name="ID"/></Key>
+				<Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="20"/>
+				<Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:label="Company Code" sap:filterable="true"/>
+				<Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" sap:label="Sales Organization" sap:filterable="true"/>
+				<Property Name="FiscalYear" Type="Edm.String" MaxLength="4" sap:label="Fiscal Year" sap:filterable="true"/>
+			</EntityType>
+			<EntityContainer Name="SD_SALES_OVERVIEW_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json">
+				<EntitySet Name="DocumentFlowSet" EntityType="SD_SALES_OVERVIEW_SRV.DocumentFlow" sap:creatable="false" sap:updatable="false" sap:deletable="false"/>
+				<EntitySet Name="SalesByMonthSet" EntityType="SD_SALES_OVERVIEW_SRV.SalesByMonth" sap:creatable="false" sap:updatable="false" sap:deletable="false"/>
+				<EntitySet Name="PipelineByStageSet" EntityType="SD_SALES_OVERVIEW_SRV.PipelineByStage" sap:creatable="false" sap:updatable="false" sap:deletable="false"/>
+				<EntitySet Name="SalesKpiSet" EntityType="SD_SALES_OVERVIEW_SRV.SalesKpi" sap:creatable="false" sap:updatable="false" sap:deletable="false"/>
+				<EntitySet Name="OpenDeliverySet" EntityType="SD_SALES_OVERVIEW_SRV.OpenDelivery" sap:creatable="false" sap:updatable="false" sap:deletable="false"/>
+				<EntitySet Name="BillingDocumentSet" EntityType="SD_SALES_OVERVIEW_SRV.BillingDocument" sap:creatable="false" sap:updatable="false" sap:deletable="false"/>
+				<EntitySet Name="CompanyCodeSet" EntityType="SD_SALES_OVERVIEW_SRV.CompanyCode" sap:creatable="false" sap:updatable="false" sap:deletable="false"/>
+				<EntitySet Name="SalesOrganizationSet" EntityType="SD_SALES_OVERVIEW_SRV.SalesOrganization" sap:creatable="false" sap:updatable="false" sap:deletable="false"/>
+				<EntitySet Name="SalesFilterSet" EntityType="SD_SALES_OVERVIEW_SRV.SalesFilter" sap:creatable="false" sap:updatable="false" sap:deletable="false"/>
+			</EntityContainer>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

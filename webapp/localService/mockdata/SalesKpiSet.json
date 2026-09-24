@@ -1,0 +1,20 @@
+[
+	{
+		"ID": "OPEN_QT",
+		"CompanyCode": "HM01",
+		"SalesOrganization": "HM10",
+		"FiscalYear": "2026",
+		"KpiName": "Open quotations",
+		"KpiValue": "3840.00",
+		"Currency": "CHF"
+	},
+	{
+		"ID": "BACKLOG",
+		"CompanyCode": "HM01",
+		"SalesOrganization": "HM10",
+		"FiscalYear": "2026",
+		"KpiName": "Order backlog",
+		"KpiValue": "10700.00",
+		"Currency": "CHF"
+	}
+]

@@ -1,0 +1,15 @@
+{
+  "name": "mindtek-sales-overview",
+  "version": "1.0.0",
+  "description": "SAP Fiori Overview Page for Helvetia Motion AG sales document flow",
+  "private": true,
+  "scripts": {
+    "start": "ui5 serve --port 8083 --open index.html",
+    "generate-mockdata": "node scripts/generate-mockdata.js",
+    "check-document-flow": "node scripts/check-document-flow.js"
+  },
+  "devDependencies": {
+    "@ui5/cli": "^3.9.0",
+    "ui5-middleware-livereload": "^3.4.0"
+  }
+}
