@@ -84,6 +84,9 @@
 		"globalFilterEntitySet": "SalesFilterSet",
 		"containerLayout": "fixed",
 		"enableLiveFilter": false,
+		"dataLoadSettings": {
+			"loadDataOnAppLaunch": "always"
+		},
 		"showDateInRelativeFormat": false,
 		"considerAnalyticalParameters": false,
 		"cards": {
